@@ -51,7 +51,7 @@ class TripsCell: UITableViewCell {
         self.tripImageView.image = Trip.tripImage
         self.tripTitleLabel.text = Trip.title
         self.numberOfDaysTripLabel.text = "\(Trip.numberOfDays) dias"
-        self.priceTripLabel.text = Trip.price
+        self.priceTripLabel.text = "R$ \(Trip.price)"
     }
     
     
@@ -68,7 +68,7 @@ class TripsCell: UITableViewCell {
         tripTitleLabel.translatesAutoresizingMaskIntoConstraints = false
         tripTitleLabel.numberOfLines = 0
         tripTitleLabel.adjustsFontSizeToFitWidth = true
-        tripTitleLabel.font = UIFont.systemFont(ofSize: 20.0)
+        tripTitleLabel.font = UIFont.systemFont(ofSize: 25.0)
         tripTitleLabel.textAlignment = .left
         tripTitleLabel.textColor = UIColor(red: 85/255, green: 85/255, blue: 85/255, alpha: 1.0)
     }
@@ -79,7 +79,7 @@ class TripsCell: UITableViewCell {
         numberOfDaysTripLabel.numberOfLines = 0
         numberOfDaysTripLabel.textAlignment = .left
         numberOfDaysTripLabel.adjustsFontSizeToFitWidth = true
-        numberOfDaysTripLabel.font = UIFont.systemFont(ofSize: 15.0)
+        numberOfDaysTripLabel.font = UIFont.systemFont(ofSize: 20.0)
         numberOfDaysTripLabel.textColor = UIColor(red: 85/255, green: 85/255, blue: 85/255, alpha: 1.0)
     }
     
@@ -88,13 +88,12 @@ class TripsCell: UITableViewCell {
         priceTripLabel.numberOfLines = 0
         priceTripLabel.textAlignment = .right
         priceTripLabel.adjustsFontSizeToFitWidth = true
-        priceTripLabel.font = UIFont.systemFont(ofSize: 15.0)
+        priceTripLabel.font = UIFont.systemFont(ofSize: 20.0)
         priceTripLabel.textColor = UIColor(red: 85/255, green: 85/255, blue: 85/255, alpha: 1.0)
     }
     
     
     // setting up layouts
-    
     
     func setImageConstraints() {
         

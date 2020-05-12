@@ -41,6 +41,31 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		D80C2F68246AF80B00066340 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				D89C30642469BA82002FEE1C /* Trips.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		D80C2F69246AF82200066340 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				D89C30622469B2A7002FEE1C /* TripsCell.swift */,
+				D89C3054246987CF002FEE1C /* Main.storyboard */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		D80C2F6A246AF83500066340 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				D89C3052246987CF002FEE1C /* ViewController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
 		D89C3042246987CF002FEE1C = {
 			isa = PBXGroup;
 			children = (
@@ -60,15 +85,14 @@
 		D89C304D246987CF002FEE1C /* app-viagens */ = {
 			isa = PBXGroup;
 			children = (
+				D80C2F6A246AF83500066340 /* Controller */,
+				D80C2F69246AF82200066340 /* View */,
+				D80C2F68246AF80B00066340 /* Model */,
 				D89C304E246987CF002FEE1C /* AppDelegate.swift */,
 				D89C3050246987CF002FEE1C /* SceneDelegate.swift */,
-				D89C3052246987CF002FEE1C /* ViewController.swift */,
-				D89C3054246987CF002FEE1C /* Main.storyboard */,
 				D89C3057246987DC002FEE1C /* Assets.xcassets */,
 				D89C3059246987DC002FEE1C /* LaunchScreen.storyboard */,
 				D89C305C246987DC002FEE1C /* Info.plist */,
-				D89C30622469B2A7002FEE1C /* TripsCell.swift */,
-				D89C30642469BA82002FEE1C /* Trips.swift */,
 			);
 			path = "app-viagens";
 			sourceTree = "<group>";

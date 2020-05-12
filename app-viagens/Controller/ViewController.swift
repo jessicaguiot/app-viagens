@@ -126,6 +126,7 @@ class ViewController: UIViewController {
         button.translatesAutoresizingMaskIntoConstraints = false
         button.backgroundColor = color
         button.setTitle(title, for: .normal)
+        button.titleLabel?.font = UIFont.systemFont(ofSize: 20)
         button.layer.cornerRadius = 10
     }
     
@@ -134,7 +135,7 @@ class ViewController: UIViewController {
     func setUpTableView() {
         view.addSubview(tableView)
         
-        tableView.rowHeight = 190
+        tableView.rowHeight = 200
         
         
         //removing the separator
@@ -181,9 +182,11 @@ extension ViewController {
     func fetchData() -> [Trips] {
         
         let ceara = Trips(title: "Ceará", numberOfDays: "3", price: "1.800,59", tripImage: UIImage(named:"img1")!)
-        let rioDeJaneiro = Trips(title: "Rio de Janeiro", numberOfDays: "6", price: "1.800,59", tripImage: UIImage(named:"img2")!)
-        
-        return [ceara, rioDeJaneiro]
+        let rioDeJaneiro = Trips(title: "Rio de Janeiro", numberOfDays: "6", price: "2.900,00", tripImage: UIImage(named:"img2")!)
+        let saoPaulo = Trips(title: "São Paulo", numberOfDays: "8", price: "3.000,00", tripImage: UIImage(named:"img3")!)
+        let minasGerais = Trips(title: "Minas Gerais", numberOfDays: "12", price: "5.800,59", tripImage: UIImage(named:"img4")!)
+        let amazonas = Trips(title: "Amazonas", numberOfDays: "4", price: "4.800,59", tripImage: UIImage(named:"img5")!)
+        return [ceara, rioDeJaneiro, saoPaulo, amazonas, minasGerais]
         
         
     }
