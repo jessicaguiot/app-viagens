@@ -76,6 +76,8 @@ class ViewController: UIViewController {
         tableView.dataSource = self
         tableView.delegate = self
         
+        
+        
         setUpTableView()
         
     }
@@ -132,16 +134,21 @@ class ViewController: UIViewController {
     func setUpTableView() {
         view.addSubview(tableView)
         
-        tableView.rowHeight = 175
+        tableView.rowHeight = 190
+        
+        
+        //removing the separator
+        tableView.separatorStyle = .none
         
         tableView.translatesAutoresizingMaskIntoConstraints = false
         
-        tableView.topAnchor.constraint(equalTo: buttonHotels.bottomAnchor).isActive = true
+        tableView.topAnchor.constraint(equalTo: buttonHotels.bottomAnchor, constant: 20).isActive = true
         tableView.leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true
         tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
         tableView.rightAnchor.constraint(equalTo: view.rightAnchor).isActive = true
         
-        //adicionando a celula
+        
+        //registrando a celula 
         tableView.register(TripsCell.self, forCellReuseIdentifier: Cells.tripsCell)
     }
     
@@ -160,9 +167,11 @@ extension ViewController: UITableViewDataSource, UITableViewDelegate {
         let cell = tableView.dequeueReusableCell(withIdentifier: Cells.tripsCell, for: indexPath) as! TripsCell
         
         cell.set(Trip: listTrips[indexPath.row])
+    
         
         return cell
     }
+    
     
 }
 
