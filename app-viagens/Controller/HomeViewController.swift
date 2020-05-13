@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class HomeViewController: UIViewController {
     
     
     //MARK: - Elements View
@@ -49,6 +49,8 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        view.backgroundColor = .white
         
         listTrips = fetchData()
         
@@ -158,7 +160,7 @@ class ViewController: UIViewController {
 }
 
 
-extension ViewController: UITableViewDataSource, UITableViewDelegate {
+extension HomeViewController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return listTrips.count
@@ -176,7 +178,7 @@ extension ViewController: UITableViewDataSource, UITableViewDelegate {
     
 }
 
-extension ViewController {
+extension HomeViewController {
     
     
     func fetchData() -> [Trips] {
