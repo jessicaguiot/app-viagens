@@ -8,7 +8,7 @@
 
 import UIKit
 
-class PacotesViewController: UIViewController, UICollectionViewDelegateFlowLayout {
+class PackageViewController: UIViewController, UICollectionViewDelegateFlowLayout {
 
     //MARK: - Elements
     
@@ -21,6 +21,7 @@ class PacotesViewController: UIViewController, UICollectionViewDelegateFlowLayou
         
         label.text = "Pacotes"
         label.font = UIFont.systemFont(ofSize: 20)
+        label.textColor = UIColor(red: 85/255, green: 85/255, blue: 85/255, alpha: 1.0)
         
         return label
     }()
@@ -30,22 +31,15 @@ class PacotesViewController: UIViewController, UICollectionViewDelegateFlowLayou
         let label = UILabel()
               
         label.text = "6 pacotes encontrados"
-        label.font = UIFont.systemFont(ofSize: 20)
-              
+        label.font = UIFont.systemFont(ofSize: 17)
+        label.textColor = UIColor(red: 85/255, green: 85/255, blue: 85/255, alpha: 1.0)
+        
+        
         return label
         
     }()
     
-    let textField: UITextField = {
-        
-        let textField = UITextField()
-        
-        textField.borderStyle = .roundedRect
-        
-        return textField
-        
-    }()
-    
+    let searchBar =  UISearchBar()
     
     let collectionView = UICollectionView(frame: CGRect.zero, collectionViewLayout: UICollectionViewFlowLayout.init())
     
@@ -59,7 +53,8 @@ class PacotesViewController: UIViewController, UICollectionViewDelegateFlowLayou
         
     }
     
-    var listTripsCell = [Trips]()
+    var listWithAllTrips = [Trips]()
+    var listTrips = [Trips]()
     
     
     override func viewDidLoad() {
@@ -67,17 +62,23 @@ class PacotesViewController: UIViewController, UICollectionViewDelegateFlowLayou
         
         view.backgroundColor = .white
         
+        listWithAllTrips = fetchData()
+        listTrips = listWithAllTrips
+        
         configureStackView()
         setStackViewConstraints()
         addElementsToStackView()
         
+        delegateSearchBar()
+        configureSearchBar()
+        setLayoutConstraintsSearchBar()
         
         setDelegateCollection()
         configureCollectioView()
         
-        listTripsCell = fetchData()
-        view.backgroundColor = UIColor(red: 235/255, green: 235/255, blue: 240/255, alpha: 1.0)
         
+        view.backgroundColor = UIColor(red: 235/255, green: 235/255, blue: 240/255, alpha: 1.0)
+        self.packagesFoundLabel.text = self.reloadCountLabel()
     }
     
     //MARK: - Stack View configuration
@@ -106,7 +107,7 @@ class PacotesViewController: UIViewController, UICollectionViewDelegateFlowLayou
     
     func addElementsToStackView(){
         stackView.addArrangedSubview(packagesLabel)
-        stackView.addArrangedSubview(textField)
+        stackView.addArrangedSubview(searchBar)
         stackView.addArrangedSubview(packagesFoundLabel)
         stackView.addArrangedSubview(collectionView)
     }
@@ -114,7 +115,7 @@ class PacotesViewController: UIViewController, UICollectionViewDelegateFlowLayou
 }
 
 
-extension PacotesViewController: UICollectionViewDataSource, UICollectionViewDelegate {
+extension PackageViewController: UICollectionViewDataSource, UICollectionViewDelegate {
     
     // Demonstrate how to use UICollectionView
     
@@ -140,22 +141,32 @@ extension PacotesViewController: UICollectionViewDataSource, UICollectionViewDel
     
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize.init(width: 135, height: 160)
+        let widthCell = collectionView.bounds.width / 2
+        
+        return CGSize(width: widthCell - 15 , height: 160)
     }
 
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return listTripsCell.count
+        return listTrips.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CellsCollection.collectionViewCell, for: indexPath) as! CollectionViewCell
         
-        cell.setInformationCell(Trip: listTripsCell[indexPath.item])
+        cell.setInformationCell(Trip: listTrips[indexPath.item])
         
         
         return cell
         
+    }
+    
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        
+        let informationViewController = InformationViewController()
+        
+        self.present(informationViewController, animated: true, completion: nil)
     }
     
     
@@ -165,7 +176,7 @@ extension PacotesViewController: UICollectionViewDataSource, UICollectionViewDel
 
 
 
-extension PacotesViewController {
+extension PackageViewController {
     
     func fetchData() -> [Trips] {
         
@@ -178,4 +189,51 @@ extension PacotesViewController {
         
         
     }
+}
+
+extension PackageViewController: UISearchBarDelegate {
+    
+    func delegateSearchBar(){
+        searchBar.delegate = self
+    }
+    
+    func configureSearchBar(){
+        
+        searchBar.placeholder = "Pesquisar por pacotes"
+        searchBar.isTranslucent = true
+        searchBar.barTintColor = .clear
+        searchBar.backgroundColor = .clear
+        searchBar.setBackgroundImage(UIImage(), for: .any, barMetrics: .default)
+        searchBar.translatesAutoresizingMaskIntoConstraints = false
+        
+    }
+    
+    func setLayoutConstraintsSearchBar(){
+        
+        searchBar.leadingAnchor.constraint(equalTo: stackView.leadingAnchor, constant: 0).isActive = true
+        searchBar.trailingAnchor.constraint(equalTo: stackView.trailingAnchor, constant: 0).isActive = true
+        searchBar.heightAnchor.constraint(equalToConstant: 30).isActive = true
+        
+    }
+    
+    
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        
+        listTrips = listWithAllTrips
+        
+        if searchText != "" {
+            
+            listTrips = listTrips.filter {$0.title.contains(searchText)}
+            
+        }
+        
+        self.packagesFoundLabel.text = self.reloadCountLabel()
+        collectionView.reloadData()
+        
+    }
+    
+    func reloadCountLabel() -> String {
+        return listTrips.count == 1 ? "1 pacote encontrado" : "\(listTrips.count) pacotes encontrados"
+    }
+    
 }

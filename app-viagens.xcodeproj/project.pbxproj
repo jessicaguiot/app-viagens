@@ -7,8 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		D80C2F6C246C262100066340 /* PacotesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D80C2F6B246C262100066340 /* PacotesViewController.swift */; };
+		D80C2F6C246C262100066340 /* PackageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D80C2F6B246C262100066340 /* PackageViewController.swift */; };
 		D80C2F6E246C34D900066340 /* CollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D80C2F6D246C34D900066340 /* CollectionViewCell.swift */; };
+		D80C2F70246D70C000066340 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D80C2F6F246D70C000066340 /* TabBarController.swift */; };
+		D80C2F72246D85A100066340 /* InformationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D80C2F71246D85A100066340 /* InformationViewController.swift */; };
 		D89C304F246987CF002FEE1C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D89C304E246987CF002FEE1C /* AppDelegate.swift */; };
 		D89C3051246987CF002FEE1C /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D89C3050246987CF002FEE1C /* SceneDelegate.swift */; };
 		D89C3053246987CF002FEE1C /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D89C3052246987CF002FEE1C /* HomeViewController.swift */; };
@@ -19,8 +21,10 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		D80C2F6B246C262100066340 /* PacotesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PacotesViewController.swift; sourceTree = "<group>"; };
+		D80C2F6B246C262100066340 /* PackageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PackageViewController.swift; sourceTree = "<group>"; };
 		D80C2F6D246C34D900066340 /* CollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewCell.swift; sourceTree = "<group>"; };
+		D80C2F6F246D70C000066340 /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
+		D80C2F71246D85A100066340 /* InformationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InformationViewController.swift; sourceTree = "<group>"; };
 		D89C304B246987CF002FEE1C /* app-viagens.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "app-viagens.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D89C304E246987CF002FEE1C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D89C3050246987CF002FEE1C /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -64,7 +68,9 @@
 			isa = PBXGroup;
 			children = (
 				D89C3052246987CF002FEE1C /* HomeViewController.swift */,
-				D80C2F6B246C262100066340 /* PacotesViewController.swift */,
+				D80C2F6B246C262100066340 /* PackageViewController.swift */,
+				D80C2F6F246D70C000066340 /* TabBarController.swift */,
+				D80C2F71246D85A100066340 /* InformationViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -171,12 +177,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				D89C30652469BA82002FEE1C /* Trips.swift in Sources */,
+				D80C2F70246D70C000066340 /* TabBarController.swift in Sources */,
 				D89C30632469B2A8002FEE1C /* TripsCell.swift in Sources */,
-				D80C2F6C246C262100066340 /* PacotesViewController.swift in Sources */,
+				D80C2F6C246C262100066340 /* PackageViewController.swift in Sources */,
 				D80C2F6E246C34D900066340 /* CollectionViewCell.swift in Sources */,
 				D89C3053246987CF002FEE1C /* HomeViewController.swift in Sources */,
 				D89C304F246987CF002FEE1C /* AppDelegate.swift in Sources */,
 				D89C3051246987CF002FEE1C /* SceneDelegate.swift in Sources */,
+				D80C2F72246D85A100066340 /* InformationViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -29,7 +29,7 @@ class CollectionViewCell: UICollectionViewCell {
         
         let label                         = UILabel()
         
-        label.font                        = UIFont.systemFont(ofSize: 12)
+        label.font                        = UIFont.boldSystemFont(ofSize: 12)
         label.textColor                   = UIColor(red: 85/255, green: 85/255, blue: 85/255, alpha: 1.0)
         label.textAlignment               = .center
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -88,7 +88,7 @@ class CollectionViewCell: UICollectionViewCell {
     
     func setInformationCell (Trip: Trips){
         self.packageImageView.image = Trip.tripImage
-        self.titleLabel.text = Trip.title
+        self.titleLabel.text = Trip.title.uppercased()
         self.numberOfDaysLabel.text = "\(Trip.numberOfDays) dias"
         self.priceLabel.text = "R$ \(Trip.price)"
     }

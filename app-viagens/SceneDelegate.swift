@@ -18,8 +18,13 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         guard let windowScene = (scene as? UIWindowScene) else { return }
         
         let window = UIWindow(windowScene: windowScene)
-        window.rootViewController = PacotesViewController() // Your initial view controller.
+        
+        //window.rootViewController = TabBarController() // Inicial view controller.
+        
+        window.rootViewController = InformationViewController()
+        
         window.makeKeyAndVisible()
+        
         self.window = window
         
         
