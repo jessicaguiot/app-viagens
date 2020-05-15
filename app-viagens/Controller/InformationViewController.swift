@@ -18,6 +18,9 @@ class InformationViewController: UIViewController {
     let itemsVerticalOneStackView = UIStackView()
     let itemsVerticalTwoStackView = UIStackView()
     let itemsVerticalThreeStackView = UIStackView()
+    let priceVerticalStackView = UIStackView()
+    let textFieldStackView = UIStackView()
+    
     
     //MARK: - Header Elements
     let headerImageView = UIImageView()
@@ -27,6 +30,8 @@ class InformationViewController: UIViewController {
         let label = UILabel()
         label.text = "PORTO DE GALINHAS"
         label.font = UIFont.boldSystemFont(ofSize: 23)
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.heightAnchor.constraint(equalToConstant: 25).isActive = true
         return label
     }()
     
@@ -35,6 +40,8 @@ class InformationViewController: UIViewController {
         let label = UILabel()
         label.text = "7 dias"
         label.font = UIFont.systemFont(ofSize: 17)
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.heightAnchor.constraint(equalToConstant: 25).isActive = true
         return label
         
     }()
@@ -44,6 +51,8 @@ class InformationViewController: UIViewController {
         let label = UILabel()
         label.text = "Pacotes: Hotel +  café da manhã"
         label.font = UIFont.systemFont(ofSize: 17)
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.heightAnchor.constraint(equalToConstant: 25).isActive = true
         return label
         
     }()
@@ -53,9 +62,24 @@ class InformationViewController: UIViewController {
         
         let label                         = UILabel()
         label.text                        = "válido para o período de: "
-        label.font                        = UIFont.systemFont(ofSize: 12)
+        label.font                        = UIFont.systemFont(ofSize: 15)
         label.textColor                   = UIColor(red: 85/255, green: 85/255, blue: 85/255, alpha: 1.0)
         label.textAlignment               = .left
+        label.numberOfLines               = 0
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.heightAnchor.constraint(equalToConstant: 40).isActive = true
+        return label
+        
+    }()
+    
+    let sinceLabel : UILabel = {
+        
+        let label                         = UILabel()
+        
+        label.text                        = "a partir de:"
+        label.font                        = UIFont.systemFont(ofSize: 15)
+        label.textColor                   = UIColor(red: 85/255, green: 85/255, blue: 85/255, alpha: 1.0)
+        label.textAlignment               = .right
         
         return label
         
@@ -64,10 +88,10 @@ class InformationViewController: UIViewController {
     let priceLabel : UILabel = {
         
         let label                         = UILabel()
-        label.text                        = "a partir de: R$ 2.490,99"
+        label.text                        = "R$ 2.490,99"
         label.numberOfLines               = 0
-        label.font                        = UIFont.systemFont(ofSize: 12)
-        label.textColor                   = UIColor(red: 85/255, green: 85/255, blue: 85/255, alpha: 1.0)
+        label.font                        = UIFont.systemFont(ofSize: 20)
+        label.textColor                   = .green
         label.textAlignment               = .right
         
         return label
@@ -79,9 +103,11 @@ class InformationViewController: UIViewController {
         
         let label                         = UILabel()
         label.text                        = "o que está incluso: "
-        label.font                        = UIFont.systemFont(ofSize: 12)
+        label.font                        = UIFont.systemFont(ofSize: 17)
         label.textColor                   = UIColor(red: 85/255, green: 85/255, blue: 85/255, alpha: 1.0)
         label.textAlignment               = .left
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.heightAnchor.constraint(equalToConstant: 25).isActive = true
         
         return label
         
@@ -91,19 +117,53 @@ class InformationViewController: UIViewController {
     
     struct includedThings {
         
-        let iconsImageView = UIImageView()
+        let viewIcons: UIView = {
+            let view = UIView()
+            view.translatesAutoresizingMaskIntoConstraints                 = false
+            view.heightAnchor.constraint(equalToConstant: 80).isActive     = true
+            return view
+        }()
+        
+        
+        let iconsImageView : UIImageView = {
+            
+            let imageView = UIImageView()
+            imageView.contentMode = .scaleToFill
+            
+            imageView.translatesAutoresizingMaskIntoConstraints                 = false
+            imageView.heightAnchor.constraint(equalToConstant: 40).isActive     = true
+            imageView.widthAnchor.constraint(equalToConstant: 40).isActive      = true
+           
+            return imageView
+        }()
+        
         let iconsLabel : UILabel = {
             
             let label                         = UILabel()
             
             label.text                        = "Icons"
-            label.font                        = UIFont.systemFont(ofSize: 12)
+            label.font                        = UIFont.systemFont(ofSize: 14)
             label.textColor                   = UIColor(red: 85/255, green: 85/255, blue: 85/255, alpha: 1.0)
             label.textAlignment               = .center
+            label.numberOfLines               = 0
+            
+            
+            label.translatesAutoresizingMaskIntoConstraints                 = false
+            label.heightAnchor.constraint(equalToConstant: 21).isActive     = true
             
             return label
             
         }()
+        
+        mutating func addItemsToView(nameIcon: String, icon: Icon){
+            
+            iconsImageView.image    = UIImage(named: icon.rawValue)
+            iconsLabel.text         = nameIcon
+            
+            
+            viewIcons.addSubview(iconsImageView)
+            viewIcons.addSubview(iconsLabel)
+        }
         
     }
     
@@ -116,9 +176,11 @@ class InformationViewController: UIViewController {
         let label                         = UILabel()
         
         label.text                        = "CARTÃO DE CRÉDITO"
-        label.font                        = UIFont.systemFont(ofSize: 12)
+        label.font                        = UIFont.boldSystemFont(ofSize: 17)
         label.textColor                   = UIColor(red: 85/255, green: 85/255, blue: 85/255, alpha: 1.0)
-        label.textAlignment               = .center
+        label.textAlignment               = .left
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.heightAnchor.constraint(equalToConstant: 25).isActive = true
         
         return label
         
@@ -127,49 +189,130 @@ class InformationViewController: UIViewController {
     
     let numberOfCardTextField: UITextField = {
         let textField = UITextField()
-        textField.layer.borderWidth = 2
-        textField.layer.borderColor = UIColor.black.cgColor
-    
+        textField.layer.borderWidth = 1
+        textField.layer.borderColor = UIColor(red: 85/255, green: 85/255, blue: 85/255, alpha: 1.0).cgColor
+        textField.layer.cornerRadius = 6
+        textField.placeholder = " Número do cartão"
+        
+        textField.translatesAutoresizingMaskIntoConstraints = false
+        textField.heightAnchor.constraint(equalToConstant: 30).isActive = true
+        
         return textField
     }()
     
     
     let nameInCardTextField: UITextField = {
         let textField = UITextField()
-        textField.layer.borderWidth = 2
-        textField.layer.borderColor = UIColor.black.cgColor
-    
+        textField.layer.borderWidth = 1
+        textField.layer.borderColor = UIColor(red: 85/255, green: 85/255, blue: 85/255, alpha: 1.0).cgColor
+        textField.layer.cornerRadius = 6
+        textField.placeholder = " Nome no cartão"
+        
+        textField.translatesAutoresizingMaskIntoConstraints = false
+        textField.heightAnchor.constraint(equalToConstant: 30).isActive = true
+        
         return textField
     }()
     
     
     let dateOfCardTextField: UITextField = {
         let textField = UITextField()
-        textField.layer.borderWidth = 2
-        textField.layer.borderColor = UIColor.black.cgColor
+        textField.layer.borderWidth = 1
+        textField.layer.borderColor = UIColor(red: 85/255, green: 85/255, blue: 85/255, alpha: 1.0).cgColor
+        textField.layer.cornerRadius = 6
+        textField.placeholder = " Data de validade do cartão"
+        textField.translatesAutoresizingMaskIntoConstraints = false
+        textField.heightAnchor.constraint(equalToConstant: 30).isActive = true
+        
     
         return textField
     }()
     
+    let passwordTextField: UITextField = {
+        let textField = UITextField()
+        textField.layer.borderWidth = 1
+        textField.layer.borderColor = UIColor(red: 85/255, green: 85/255, blue: 85/255, alpha: 1.0).cgColor
+        textField.layer.cornerRadius = 6
+        textField.placeholder = " Digite a senha do cartão"
+        textField.translatesAutoresizingMaskIntoConstraints = false
+        textField.heightAnchor.constraint(equalToConstant: 30).isActive = true
+        
+        return textField
+    }()
     
     let endBuyButton =  UIButton()
+    
+    let backButton: UIButton = {
+        
+        let button = UIButton()
+        
+        //button.setTitle("chevron.left", for: .normal)
+        button.setBackgroundImage(UIImage(systemName: "chevron.left"), for: .normal)
+        button.backgroundColor = .clear
+        button.tintColor = .white
+        
+        return button
+        
+    }()
+    
+    let separator1 : UIView = {
+        
+        let view = UIView()
+        
+        view.backgroundColor = UIColor(red: 85/255, green: 85/255, blue: 85/255, alpha: 1.0)
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.heightAnchor.constraint(equalToConstant: 1).isActive = true
+        
+        return view
+        
+        
+    }()
+       
+    let separator2 : UIView = {
+        
+        let view = UIView()
+        
+        view.backgroundColor = UIColor(red: 85/255, green: 85/255, blue: 85/255, alpha: 1.0)
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.heightAnchor.constraint(equalToConstant: 1).isActive = true
+        
+        return view
+        
+        
+    }()
+    
+    
+    //MARK: - Atributos
+    
+    var packageSelected: PackageTrip? = nil
+    
+    enum Icon: String {
+        
+        case Airplane = "icon_airplane"
+        case Breakfast = "icon_breakfast"
+        case Hotel = "icon_hotel"
+        
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         view.backgroundColor = .white
-       
+        
+        view.sendSubviewToBack(rootVerticalStackView)
+        configureImageView()
+        
         
         configureRootVerticalStackView()
         configureLabelsHorizontalStackView()
         configureIncludedItemsHorizontalStackView()
-        
+        setRootVerticalStackViewConstraints()
         
         configureItemsOneVerticalStackView()
         configureItemsTwoVerticalStackView()
         configureItemsThreeVerticalStackView()
+        configureTextFieldStackItems()
         
-        configureImageView()
         configureButton()
         
         addElementsToRootVerticalStackView()
@@ -178,25 +321,66 @@ class InformationViewController: UIViewController {
         addElementsToItemsOneVerticalStackView()
         addElementsToItemsTwoVerticalStackView()
         addElementsToItemsThreeVerticalStackView()
+        addElementsToTextFieldStackView()
         
-        setRootVerticalStackViewConstraints()
+        
+        setPackage()
+        
+        view.addSubview(backButton)
+        targetButton()
+        setBackButtonConstraints()
     }
+    
+    func setPackage(){
+        guard let package = packageSelected else {return}
+        
+        self.headerImageView.image                       = package.trip.tripImage
+        self.titlelabeL.text                             = package.trip.title
+        self.packageInformationLabel.text                = package.descriptionTrip
+        self.numberDaysLabel.text                        = package.trip.numberOfDays
+        self.periodLabel.text                            = "válido para o período de: \(package.tripDate)"
+        self.priceLabel.text                             = package.trip.price
+        
+    }
+    
+    func targetButton(){
+        
+        backButton.addTarget(self, action: #selector(back), for: .touchUpInside)
+        
+    }
+    
+    @objc func back(){
+        
+        self.dismiss(animated: true, completion: nil)
+        
+    }
+    
     
     //MARK: - Configure methods
     
     func configureButton(){
         
         endBuyButton.setTitle("finalizar compra", for: .normal)
-        endBuyButton.backgroundColor = .black
-        
+        endBuyButton.backgroundColor = .orange
+        endBuyButton.layer.cornerRadius = 6
+        endBuyButton.translatesAutoresizingMaskIntoConstraints = false
+        endBuyButton.heightAnchor.constraint(equalToConstant: 35).isActive = true
     }
     
     
     func configureImageView() {
         
+        view.addSubview(headerImageView)
+        view.sendSubviewToBack(headerImageView)
+        
+        headerImageView.clipsToBounds = true
+        headerImageView.contentMode = .scaleToFill
+        
         headerImageView.translatesAutoresizingMaskIntoConstraints = false
         headerImageView.heightAnchor.constraint(equalToConstant: 185).isActive =  true
-        
+        headerImageView.widthAnchor.constraint(equalToConstant: view.bounds.width).isActive = true
+        headerImageView.centerXAnchor.constraint(equalTo: view.centerXAnchor, constant: 0).isActive = true
+        headerImageView.topAnchor.constraint(equalTo: view.topAnchor, constant: 0).isActive = true
     }
     
     
@@ -205,7 +389,7 @@ class InformationViewController: UIViewController {
         view.addSubview(rootVerticalStackView)
         rootVerticalStackView.axis          = .vertical
         rootVerticalStackView.distribution  = .fill
-        rootVerticalStackView.spacing       = 15
+        rootVerticalStackView.spacing       = 5
         
     }
     
@@ -221,14 +405,14 @@ class InformationViewController: UIViewController {
            
            includedItemsHorizontalStackView.axis          = .horizontal
            includedItemsHorizontalStackView.distribution  = .fillEqually
-           includedItemsHorizontalStackView.spacing       = 5
+           includedItemsHorizontalStackView.spacing       = 20
     }
     
     func configureItemsOneVerticalStackView(){
     
         itemsVerticalOneStackView.axis          = .vertical
         itemsVerticalOneStackView.distribution  = .fill
-        itemsVerticalOneStackView.spacing       = 15
+        itemsVerticalOneStackView.spacing       = 5
         
     }
     
@@ -236,7 +420,7 @@ class InformationViewController: UIViewController {
     
         itemsVerticalTwoStackView.axis          = .vertical
         itemsVerticalTwoStackView.distribution  = .fill
-        itemsVerticalTwoStackView.spacing       = 15
+        itemsVerticalTwoStackView.spacing       = 5
         
     }
     
@@ -244,67 +428,102 @@ class InformationViewController: UIViewController {
     
         itemsVerticalThreeStackView.axis          = .vertical
         itemsVerticalThreeStackView.distribution  = .fill
-        itemsVerticalThreeStackView.spacing       = 15
+        itemsVerticalThreeStackView.spacing       = 5
         
+    }
+    
+    func configureTextFieldStackItems(){
+        
+        textFieldStackView.axis          = .vertical
+        textFieldStackView.distribution  = .fill
+        textFieldStackView.spacing       = 8
     }
     
     
     //MARK: - Adding elemetns in stack views methods
     
     func addElementsToRootVerticalStackView(){
-        
-        //header
-        rootVerticalStackView.addArrangedSubview(headerImageView)
+
         rootVerticalStackView.addArrangedSubview(titlelabeL)
         rootVerticalStackView.addArrangedSubview(packageInformationLabel)
         rootVerticalStackView.addArrangedSubview(numberDaysLabel)
-        
-        //informations
         rootVerticalStackView.addArrangedSubview(labelsHorizontalStackView)
+        rootVerticalStackView.addArrangedSubview(separator1)
         rootVerticalStackView.addArrangedSubview(includLabel)
         rootVerticalStackView.addArrangedSubview(includedItemsHorizontalStackView)
-        
-        //payments
+        rootVerticalStackView.addArrangedSubview(separator2)
         rootVerticalStackView.addArrangedSubview(cardLabel)
-        rootVerticalStackView.addArrangedSubview(numberOfCardTextField)
-        rootVerticalStackView.addArrangedSubview(nameInCardTextField)
-        rootVerticalStackView.addArrangedSubview(dateOfCardTextField)
+        rootVerticalStackView.addArrangedSubview(textFieldStackView)
         rootVerticalStackView.addArrangedSubview(endBuyButton)
         
     }
     
     func addElementsToLabelsHorizontalStackView(){
         
+        
+        priceVerticalStackView.axis = .vertical
+        priceVerticalStackView.distribution = .fill
+        priceVerticalStackView.addArrangedSubview(sinceLabel)
+        priceVerticalStackView.addArrangedSubview(priceLabel)
+        
         labelsHorizontalStackView.addArrangedSubview(periodLabel)
-        labelsHorizontalStackView.addArrangedSubview(priceLabel)
+        labelsHorizontalStackView.addArrangedSubview(priceVerticalStackView)
         
     }
     
     func addElementsToItemsOneVerticalStackView(){
             
-        let iconsOne = includedThings()
-
-        itemsVerticalOneStackView.addArrangedSubview(iconsOne.iconsImageView)
-        itemsVerticalOneStackView.addArrangedSubview(iconsOne.iconsLabel)
+        var iconsOne = includedThings()
+    
+        iconsOne.addItemsToView(nameIcon: "Avião", icon: Icon.Airplane)
+        setConstrainsIcons(icon: iconsOne)
+        
+        itemsVerticalOneStackView.addArrangedSubview(iconsOne.viewIcons)
+        
         
     }
     
     
     func addElementsToItemsTwoVerticalStackView(){
             
-        let iconsTwo = includedThings()
-
-        itemsVerticalTwoStackView.addArrangedSubview(iconsTwo.iconsImageView)
-        itemsVerticalTwoStackView.addArrangedSubview(iconsTwo.iconsLabel)
+        var iconsTwo = includedThings()
+        
+        iconsTwo.addItemsToView(nameIcon: "Café da Manhã", icon: Icon.Breakfast)
+        setConstrainsIcons(icon: iconsTwo)
+        
+        itemsVerticalTwoStackView.addArrangedSubview(iconsTwo.viewIcons)
+        
         
     }
     
     func addElementsToItemsThreeVerticalStackView(){
             
-        let iconsThree = includedThings()
-
-        itemsVerticalThreeStackView.addArrangedSubview(iconsThree.iconsImageView)
-        itemsVerticalThreeStackView.addArrangedSubview(iconsThree.iconsLabel)
+        var iconsThree = includedThings()
+        
+        iconsThree.addItemsToView(nameIcon: "Hotel", icon: Icon.Hotel)
+        setConstrainsIcons(icon: iconsThree)
+        
+        itemsVerticalThreeStackView.addArrangedSubview(iconsThree.viewIcons)
+        
+        
+    }
+    
+    
+    func addElementsToTextFieldStackView(){
+        textFieldStackView.addArrangedSubview(numberOfCardTextField)
+        textFieldStackView.addArrangedSubview(nameInCardTextField)
+        textFieldStackView.addArrangedSubview(dateOfCardTextField)
+        textFieldStackView.addArrangedSubview(passwordTextField)
+    }
+    
+    func setConstrainsIcons(icon: includedThings){
+        
+        
+        icon.iconsImageView.centerYAnchor.constraint(equalTo: icon.viewIcons.centerYAnchor, constant: -15).isActive = true
+        icon.iconsImageView.centerXAnchor.constraint(equalTo: icon.viewIcons.centerXAnchor, constant: 0).isActive = true
+        
+        icon.iconsLabel.centerYAnchor.constraint(equalTo: icon.viewIcons.centerYAnchor, constant: 25).isActive = true
+        icon.iconsLabel.centerXAnchor.constraint(equalTo: icon.viewIcons.centerXAnchor, constant: 0).isActive = true
         
     }
     
@@ -320,11 +539,21 @@ class InformationViewController: UIViewController {
     //MARK: - Constraints
     
     func setRootVerticalStackViewConstraints(){
-        rootVerticalStackView.translatesAutoresizingMaskIntoConstraints                                       = false
-        rootVerticalStackView.topAnchor.constraint(equalTo: view.topAnchor, constant: 30).isActive            = true
-        rootVerticalStackView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 30).isActive    = true
-        rootVerticalStackView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -30).isActive = true
+        rootVerticalStackView.translatesAutoresizingMaskIntoConstraints = false
+        rootVerticalStackView.topAnchor.constraint(equalTo: headerImageView.bottomAnchor, constant: 5).isActive = true
+        rootVerticalStackView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 10).isActive    = true
+        rootVerticalStackView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -10).isActive = true
         rootVerticalStackView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -10).isActive = true
     }
+    
+    func setBackButtonConstraints(){
+        
+        backButton.translatesAutoresizingMaskIntoConstraints = false
+        backButton.centerXAnchor.constraint(equalTo: view.centerXAnchor, constant: -170).isActive  = true
+        backButton.centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: -290).isActive  = true
+        backButton.heightAnchor.constraint(equalToConstant: 40).isActive                           = true
+        backButton.widthAnchor.constraint(equalToConstant: 30).isActive                            = true
+    }
+    
     
 }

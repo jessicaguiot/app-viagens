@@ -19,9 +19,9 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         let window = UIWindow(windowScene: windowScene)
         
-        //window.rootViewController = TabBarController() // Inicial view controller.
+        window.rootViewController = TabBarController() // Inicial view controller.
         
-        window.rootViewController = InformationViewController()
+        //window.rootViewController = InformationViewController()
         
         window.makeKeyAndVisible()
         

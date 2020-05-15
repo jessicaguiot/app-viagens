@@ -53,8 +53,8 @@ class PackageViewController: UIViewController, UICollectionViewDelegateFlowLayou
         
     }
     
-    var listWithAllTrips = [Trips]()
-    var listTrips = [Trips]()
+    var listWithAllTrips = [PackageTrip]()
+    var listTrips = [PackageTrip]()
     
     
     override func viewDidLoad() {
@@ -62,7 +62,7 @@ class PackageViewController: UIViewController, UICollectionViewDelegateFlowLayou
         
         view.backgroundColor = .white
         
-        listWithAllTrips = fetchData()
+        listWithAllTrips = fetchDataPackages()
         listTrips = listWithAllTrips
         
         configureStackView()
@@ -154,7 +154,7 @@ extension PackageViewController: UICollectionViewDataSource, UICollectionViewDel
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CellsCollection.collectionViewCell, for: indexPath) as! CollectionViewCell
         
-        cell.setInformationCell(Trip: listTrips[indexPath.item])
+        cell.setInformationCell(Trip: listTrips[indexPath.item].trip)
         
         
         return cell
@@ -164,7 +164,13 @@ extension PackageViewController: UICollectionViewDataSource, UICollectionViewDel
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
+        let package = listTrips[indexPath.item]
+        
+        
         let informationViewController = InformationViewController()
+        
+        informationViewController.modalPresentationStyle = .fullScreen
+        informationViewController.packageSelected = package
         
         self.present(informationViewController, animated: true, completion: nil)
     }
@@ -178,14 +184,16 @@ extension PackageViewController: UICollectionViewDataSource, UICollectionViewDel
 
 extension PackageViewController {
     
-    func fetchData() -> [Trips] {
+    func fetchDataPackages() -> [PackageTrip] {
         
-        let ceara = Trips(title: "Ceará", numberOfDays: "3", price: "1.800,59", tripImage: UIImage(named:"img1")!)
-        let rioDeJaneiro = Trips(title: "Rio de Janeiro", numberOfDays: "6", price: "2.900,00", tripImage: UIImage(named:"img2")!)
-        let saoPaulo = Trips(title: "São Paulo", numberOfDays: "8", price: "3.000,00", tripImage: UIImage(named:"img3")!)
-        let minasGerais = Trips(title: "Minas Gerais", numberOfDays: "12", price: "5.800,59", tripImage: UIImage(named:"img4")!)
-        let amazonas = Trips(title: "Amazonas", numberOfDays: "4", price: "4.800,59", tripImage: UIImage(named:"img5")!)
-        return [ceara, rioDeJaneiro, saoPaulo, amazonas, minasGerais]
+        let packagePortoGalinhas = PackageTrip(hotelName: "Resort Porto de Galinhas", descriptionTrip: "Hotel + café da manhã", tripDate: "8~15 de agosto", trip: Trips(title: "Porto de Galinhas", numberOfDays: "7", price: "2.490,00", tripImage: UIImage(named: "img6")!))
+        let packageBuzios = PackageTrip(hotelName: "Resort Buzios Spa", descriptionTrip: "Hotel + café da manhã", tripDate: "9~16 de setembro", trip: Trips(title: "Buzios", numberOfDays: "5", price: "1.990,99", tripImage: UIImage(named: "img7")!))
+        let packageNatal = PackageTrip(hotelName: "Resort Natal Show", descriptionTrip: "Hotel + café da manhã", tripDate: "13~18 de setembro", trip: Trips(title: "Natal", numberOfDays: "4", price: "1.700,00", tripImage: UIImage(named: "img8")!))
+        let packageRioJaneiro = PackageTrip(hotelName: "Resort RJ Spa", descriptionTrip: "Hotel + café da manhã", tripDate: "9~13 de outubro", trip: Trips(title: "Rio de Janeiro", numberOfDays: "4", price: "2.300,00", tripImage: UIImage(named: "img9")!))
+        let packageAmazonas = PackageTrip(hotelName: "Pousada Amazonas Plus", descriptionTrip: "Hotel + café da manhã", tripDate: "9~15 de outubro", trip: Trips(title: "Amazonas", numberOfDays: "6", price: "2.850,00", tripImage: UIImage(named: "img10")!))
+        let packageSalvador = PackageTrip(hotelName: "Pousada Salvador", descriptionTrip: "Hotel + café da manhã", tripDate: "5~10 de novembro", trip: Trips(title: "Salvador", numberOfDays: "5", price: "1.880,90", tripImage: UIImage(named: "img11")!))
+       
+        return [packagePortoGalinhas, packageBuzios, packageNatal, packageRioJaneiro, packageAmazonas, packageSalvador]
         
         
     }
@@ -223,7 +231,7 @@ extension PackageViewController: UISearchBarDelegate {
         
         if searchText != "" {
             
-            listTrips = listTrips.filter {$0.title.contains(searchText)}
+            listTrips = listTrips.filter {$0.trip.title.contains(searchText)}
             
         }
         
