@@ -21,6 +21,8 @@ class InformationViewController: UIViewController {
     let priceVerticalStackView = UIStackView()
     let textFieldStackView = UIStackView()
     
+    //MARK: - Scroll view
+    let scrollView = UIScrollView()
     
     //MARK: - Header Elements
     let headerImageView = UIImageView()
@@ -193,9 +195,11 @@ class InformationViewController: UIViewController {
         textField.layer.borderColor = UIColor(red: 85/255, green: 85/255, blue: 85/255, alpha: 1.0).cgColor
         textField.layer.cornerRadius = 6
         textField.placeholder = " Número do cartão"
-        
+        textField.keyboardType = UIKeyboardType.default
+        textField.returnKeyType = UIReturnKeyType.done
+        textField.clearButtonMode = UITextField.ViewMode.whileEditing
         textField.translatesAutoresizingMaskIntoConstraints = false
-        textField.heightAnchor.constraint(equalToConstant: 30).isActive = true
+        textField.heightAnchor.constraint(equalToConstant: 40).isActive = true
         
         return textField
     }()
@@ -209,7 +213,7 @@ class InformationViewController: UIViewController {
         textField.placeholder = " Nome no cartão"
         
         textField.translatesAutoresizingMaskIntoConstraints = false
-        textField.heightAnchor.constraint(equalToConstant: 30).isActive = true
+        textField.heightAnchor.constraint(equalToConstant: 40).isActive = true
         
         return textField
     }()
@@ -222,7 +226,7 @@ class InformationViewController: UIViewController {
         textField.layer.cornerRadius = 6
         textField.placeholder = " Data de validade do cartão"
         textField.translatesAutoresizingMaskIntoConstraints = false
-        textField.heightAnchor.constraint(equalToConstant: 30).isActive = true
+        textField.heightAnchor.constraint(equalToConstant: 40).isActive = true
         
     
         return textField
@@ -235,7 +239,7 @@ class InformationViewController: UIViewController {
         textField.layer.cornerRadius = 6
         textField.placeholder = " Digite a senha do cartão"
         textField.translatesAutoresizingMaskIntoConstraints = false
-        textField.heightAnchor.constraint(equalToConstant: 30).isActive = true
+        textField.heightAnchor.constraint(equalToConstant: 40).isActive = true
         
         return textField
     }()
@@ -301,6 +305,10 @@ class InformationViewController: UIViewController {
         
         view.sendSubviewToBack(rootVerticalStackView)
         configureImageView()
+        setScrollView()
+        
+        // saber quando o teclado vai subir
+        NotificationCenter.default.addObserver(self, selector: #selector(aumentaScrollView(notification:)), name: UIResponder.keyboardWillShowNotification, object: nil)
         
         
         configureRootVerticalStackView()
@@ -329,6 +337,25 @@ class InformationViewController: UIViewController {
         view.addSubview(backButton)
         targetButton()
         setBackButtonConstraints()
+    }
+    
+    @objc func aumentaScrollView(notification: Notification){
+        scrollView.contentOffset.y = 200
+    }
+    
+    func setScrollView(){
+        view.addSubview(scrollView)
+        setUpScollViewConstraints()
+        scrollView.addSubview(rootVerticalStackView)
+    }
+    
+    func setUpScollViewConstraints() {
+        scrollView.translatesAutoresizingMaskIntoConstraints = false
+        scrollView.topAnchor.constraint(equalTo: headerImageView.bottomAnchor, constant: 10).isActive = true
+        scrollView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -10).isActive = true
+        scrollView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 0).isActive = true
+        scrollView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: 0).isActive = true
+        
     }
     
     func setPackage(){
@@ -364,7 +391,7 @@ class InformationViewController: UIViewController {
         endBuyButton.backgroundColor = .orange
         endBuyButton.layer.cornerRadius = 6
         endBuyButton.translatesAutoresizingMaskIntoConstraints = false
-        endBuyButton.heightAnchor.constraint(equalToConstant: 35).isActive = true
+        endBuyButton.heightAnchor.constraint(equalToConstant: 40).isActive = true
     }
     
     
@@ -385,12 +412,11 @@ class InformationViewController: UIViewController {
     
     
     func configureRootVerticalStackView(){
-        
-        view.addSubview(rootVerticalStackView)
+    
         rootVerticalStackView.axis          = .vertical
         rootVerticalStackView.distribution  = .fill
-        rootVerticalStackView.spacing       = 5
-        
+        rootVerticalStackView.spacing       = 15
+       
     }
     
     func configureLabelsHorizontalStackView(){
@@ -436,7 +462,7 @@ class InformationViewController: UIViewController {
         
         textFieldStackView.axis          = .vertical
         textFieldStackView.distribution  = .fill
-        textFieldStackView.spacing       = 8
+        textFieldStackView.spacing       = 12
     }
     
     
@@ -540,10 +566,10 @@ class InformationViewController: UIViewController {
     
     func setRootVerticalStackViewConstraints(){
         rootVerticalStackView.translatesAutoresizingMaskIntoConstraints = false
-        rootVerticalStackView.topAnchor.constraint(equalTo: headerImageView.bottomAnchor, constant: 5).isActive = true
-        rootVerticalStackView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 10).isActive    = true
-        rootVerticalStackView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -10).isActive = true
-        rootVerticalStackView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -10).isActive = true
+        rootVerticalStackView.topAnchor.constraint(equalTo: scrollView.topAnchor).isActive = true
+        rootVerticalStackView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor).isActive = true
+        rootVerticalStackView.widthAnchor.constraint(equalToConstant: view.bounds.size.width - 20).isActive = true
+        rootVerticalStackView.centerXAnchor.constraint(equalTo: scrollView.centerXAnchor, constant: 0).isActive = true
     }
     
     func setBackButtonConstraints(){
