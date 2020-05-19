@@ -172,12 +172,9 @@ extension PackageViewController: UICollectionViewDataSource, UICollectionViewDel
         informationViewController.modalPresentationStyle = .fullScreen
         informationViewController.packageSelected = package
         
-        self.present(informationViewController, animated: true, completion: nil)
+        //self.present(informationViewController, animated: true, completion: nil)
+        navigationController?.pushViewController(informationViewController, animated: true)
     }
-    
-    
-    
-    
 }
 
 
@@ -209,6 +206,7 @@ extension PackageViewController: UISearchBarDelegate {
         
         searchBar.placeholder = "Pesquisar por pacotes"
         searchBar.isTranslucent = true
+        searchBar.searchBarStyle = .minimal
         searchBar.barTintColor = .clear
         searchBar.backgroundColor = .clear
         searchBar.setBackgroundImage(UIImage(), for: .any, barMetrics: .default)

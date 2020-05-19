@@ -25,8 +25,6 @@ class TabBarController: UITabBarController {
         
         homeViewController.tabBarItem = UITabBarItem(title: "procurar", image: UIImage(systemName: "magnifyingglass.circle"), selectedImage: UIImage(systemName: "magnifyingglass.circle"))
         packageViewController.tabBarItem = UITabBarItem(title: "pacotes", image: UIImage(systemName: "briefcase"), selectedImage: UIImage(systemName: "briefcase"))
-    
-        
     }
     
 }

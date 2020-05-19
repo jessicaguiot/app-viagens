@@ -12,6 +12,7 @@
 		D80C2F70246D70C000066340 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D80C2F6F246D70C000066340 /* TabBarController.swift */; };
 		D80C2F72246D85A100066340 /* InformationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D80C2F71246D85A100066340 /* InformationViewController.swift */; };
 		D80C2F74246EBEBD00066340 /* PackageTrip.swift in Sources */ = {isa = PBXBuildFile; fileRef = D80C2F73246EBEBD00066340 /* PackageTrip.swift */; };
+		D8450D292472EA4300F857F2 /* PurchaseConfirmationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8450D282472EA4300F857F2 /* PurchaseConfirmationViewController.swift */; };
 		D89C304F246987CF002FEE1C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D89C304E246987CF002FEE1C /* AppDelegate.swift */; };
 		D89C3051246987CF002FEE1C /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D89C3050246987CF002FEE1C /* SceneDelegate.swift */; };
 		D89C3053246987CF002FEE1C /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D89C3052246987CF002FEE1C /* HomeViewController.swift */; };
@@ -27,6 +28,7 @@
 		D80C2F6F246D70C000066340 /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
 		D80C2F71246D85A100066340 /* InformationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InformationViewController.swift; sourceTree = "<group>"; };
 		D80C2F73246EBEBD00066340 /* PackageTrip.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PackageTrip.swift; sourceTree = "<group>"; };
+		D8450D282472EA4300F857F2 /* PurchaseConfirmationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PurchaseConfirmationViewController.swift; sourceTree = "<group>"; };
 		D89C304B246987CF002FEE1C /* app-viagens.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "app-viagens.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D89C304E246987CF002FEE1C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D89C3050246987CF002FEE1C /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -74,6 +76,7 @@
 				D80C2F6B246C262100066340 /* PackageViewController.swift */,
 				D80C2F6F246D70C000066340 /* TabBarController.swift */,
 				D80C2F71246D85A100066340 /* InformationViewController.swift */,
+				D8450D282472EA4300F857F2 /* PurchaseConfirmationViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -188,6 +191,7 @@
 				D89C3053246987CF002FEE1C /* HomeViewController.swift in Sources */,
 				D89C304F246987CF002FEE1C /* AppDelegate.swift in Sources */,
 				D89C3051246987CF002FEE1C /* SceneDelegate.swift in Sources */,
+				D8450D292472EA4300F857F2 /* PurchaseConfirmationViewController.swift in Sources */,
 				D80C2F72246D85A100066340 /* InformationViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

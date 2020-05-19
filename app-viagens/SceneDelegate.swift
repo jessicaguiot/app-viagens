@@ -11,7 +11,8 @@ import UIKit
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     var window: UIWindow?
-
+    
+    var navigationViewController: UINavigationController?
 
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         
@@ -19,9 +20,15 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         let window = UIWindow(windowScene: windowScene)
         
-        window.rootViewController = TabBarController() // Inicial view controller.
+        navigationViewController = UINavigationController(rootViewController: TabBarController())
         
-        //window.rootViewController = InformationViewController()
+        navigationViewController?.navigationBar.isTranslucent = true
+        navigationViewController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
+        navigationViewController?.navigationBar.shadowImage = UIImage()
+        
+        window.rootViewController = navigationViewController // Inicial view controller.
+        
+        //window.rootViewController = PurchaseConfirmationViewController()
         
         window.makeKeyAndVisible()
         

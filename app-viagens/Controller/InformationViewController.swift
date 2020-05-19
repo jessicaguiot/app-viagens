@@ -195,7 +195,7 @@ class InformationViewController: UIViewController {
         textField.layer.borderColor = UIColor(red: 85/255, green: 85/255, blue: 85/255, alpha: 1.0).cgColor
         textField.layer.cornerRadius = 6
         textField.placeholder = " Número do cartão"
-        textField.keyboardType = UIKeyboardType.default
+        textField.keyboardType = UIKeyboardType.numberPad
         textField.returnKeyType = UIReturnKeyType.done
         textField.clearButtonMode = UITextField.ViewMode.whileEditing
         textField.translatesAutoresizingMaskIntoConstraints = false
@@ -214,6 +214,7 @@ class InformationViewController: UIViewController {
         
         textField.translatesAutoresizingMaskIntoConstraints = false
         textField.heightAnchor.constraint(equalToConstant: 40).isActive = true
+        textField.keyboardType = UIKeyboardType.namePhonePad
         
         return textField
     }()
@@ -240,6 +241,7 @@ class InformationViewController: UIViewController {
         textField.placeholder = " Digite a senha do cartão"
         textField.translatesAutoresizingMaskIntoConstraints = false
         textField.heightAnchor.constraint(equalToConstant: 40).isActive = true
+        textField.isSecureTextEntry = true
         
         return textField
     }()
@@ -337,10 +339,13 @@ class InformationViewController: UIViewController {
         view.addSubview(backButton)
         targetButton()
         setBackButtonConstraints()
+        textFieldDidBeginEditing(dateOfCardTextField)
+        dateOfCardTextField.delegate = self
     }
     
     @objc func aumentaScrollView(notification: Notification){
         scrollView.contentOffset.y = 200
+        self.scrollView.contentSize = CGSize(width: self.scrollView.frame.width, height: self.scrollView.frame.height + 500)
     }
     
     func setScrollView(){
@@ -392,6 +397,16 @@ class InformationViewController: UIViewController {
         endBuyButton.layer.cornerRadius = 6
         endBuyButton.translatesAutoresizingMaskIntoConstraints = false
         endBuyButton.heightAnchor.constraint(equalToConstant: 40).isActive = true
+        endBuyButton.addTarget(self, action: #selector(endPurchaseAction), for: .touchUpInside)
+    }
+    
+    @objc func endPurchaseAction(){
+        let purchaseController = PurchaseConfirmationViewController()
+        purchaseController.modalPresentationStyle = .overFullScreen
+        guard let package = packageSelected else {return}
+        purchaseController.buyPackage = package
+        //self.present(purchaseController, animated: true, completion: nil)
+        navigationController?.pushViewController(purchaseController, animated: true)
     }
     
     
@@ -581,5 +596,23 @@ class InformationViewController: UIViewController {
         backButton.widthAnchor.constraint(equalToConstant: 30).isActive                            = true
     }
     
+    
+}
+
+
+extension InformationViewController: UITextFieldDelegate {
+    
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        let dataPickerView = UIDatePicker()
+        dataPickerView.datePickerMode = .date
+        textField.inputView = dataPickerView
+        dataPickerView.addTarget(self, action: #selector(exibeDataTextField(sender:)), for: .valueChanged)
+    }
+    
+    @objc func exibeDataTextField(sender: UIDatePicker){
+        let formatador = DateFormatter()
+        formatador.dateFormat = "dd MM yyyy"
+        self.dateOfCardTextField.text = formatador.string(from: sender.date)
+    }
     
 }
