@@ -311,7 +311,7 @@ class InformationViewController: UIViewController {
         
         // saber quando o teclado vai subir
         NotificationCenter.default.addObserver(self, selector: #selector(aumentaScrollView(notification:)), name: UIResponder.keyboardWillShowNotification, object: nil)
-        
+         
         
         configureRootVerticalStackView()
         configureLabelsHorizontalStackView()
@@ -383,7 +383,7 @@ class InformationViewController: UIViewController {
     
     @objc func back(){
         
-        self.dismiss(animated: true, completion: nil)
+        navigationController?.popViewController(animated: true)
         
     }
     

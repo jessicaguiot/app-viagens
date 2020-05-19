@@ -31,13 +31,14 @@ class HomeViewController: UIViewController {
     }()
     
     
-    
     let buttonHotels = UIButton()
     let buttonPackages = UIButton()
     let tableView = UITableView()
 
-    var listTrips : [Trips] = []
     
+    //MARK: -  Atributos
+    
+    var listTrips : [Trips] = []
     
     struct Cells {
         
@@ -155,7 +156,6 @@ class HomeViewController: UIViewController {
         tableView.register(TripsCell.self, forCellReuseIdentifier: Cells.tripsCell)
     }
     
-    
 
 }
 
@@ -175,12 +175,10 @@ extension HomeViewController: UITableViewDataSource, UITableViewDelegate {
         return cell
     }
     
-    
 }
 
 extension HomeViewController {
-    
-    
+
     func fetchData() -> [Trips] {
         
         let ceara = Trips(title: "Ceará", numberOfDays: "3", price: "1.800,59", tripImage: UIImage(named:"img1")!)

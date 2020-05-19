@@ -26,6 +26,9 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         navigationViewController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
         navigationViewController?.navigationBar.shadowImage = UIImage()
         
+        navigationViewController?.setNavigationBarHidden(true, animated: false)
+        navigationViewController?.navigationItem.setHidesBackButton(true, animated: false)
+        
         window.rootViewController = navigationViewController // Inicial view controller.
         
         //window.rootViewController = PurchaseConfirmationViewController()

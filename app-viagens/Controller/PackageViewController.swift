@@ -123,7 +123,6 @@ extension PackageViewController: UICollectionViewDataSource, UICollectionViewDel
         
         collectionView.delegate = self
         collectionView.dataSource = self
-
         
     }
     
@@ -172,7 +171,6 @@ extension PackageViewController: UICollectionViewDataSource, UICollectionViewDel
         informationViewController.modalPresentationStyle = .fullScreen
         informationViewController.packageSelected = package
         
-        //self.present(informationViewController, animated: true, completion: nil)
         navigationController?.pushViewController(informationViewController, animated: true)
     }
 }
